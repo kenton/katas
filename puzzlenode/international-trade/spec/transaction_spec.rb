@@ -9,12 +9,5 @@ describe Transaction do
       Transaction.new.city.should == nil
       # Transaction.new("New York").should == "New York"
     end
-
-    it "creates a new transaction with a city or nil as default city" do
-      Transaction.new.city.should == nil
-    end
-    it "creates a new transaction with a city or nil as default city" do
-      Transaction.new.city.should == nil
-    end
   end
 end
