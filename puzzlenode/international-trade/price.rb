@@ -11,8 +11,4 @@ class Price
     (@value * 0.9911) if @currency == "USD"
   end
 
-  def inspect
-    @value
-  end
-
 end
