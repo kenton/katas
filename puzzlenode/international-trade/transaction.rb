@@ -8,4 +8,8 @@ class Transaction
     @price = Price.new(value, currency)
   end
 
+  def value
+    @price.value
+  end
+
 end
