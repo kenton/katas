@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe WeatherData do
     let(:file) { File.read("spec/fixtures/weather.dat") }
-    let(:truncated_file) do
+    let(:weather_data_from_file) do
       [
         ["1", "88", "59", "74", "53.8", "0.00", "F", "280", "9.6", "270", "17", "1.6", "93", "23", "1004.5"], 
         ["2", "79", "63", "71", "46.5", "0.00", "330", "8.7", "340", "23", "3.3", "70", "28", "1004.5"], 
@@ -40,20 +40,21 @@ describe WeatherData do
   describe "#truncate_file" do
     it "returns an array of the lines of data" do
       data = WeatherData.new(file)
-      data.send(:truncate_file).should == truncated_file
+      data.send(:truncate_file).should == weather_data_from_file
     end 
   end
 
-  describe "#temperatures" do
+  describe "#temperature_spreads" do
     it "returns a list of temperature spreads for each day" do
       data = WeatherData.new(file)
-      data.temperature_spreads.should == {"1"=>29, "2"=>16, "3"=>22, "4"=>18, "5"=>24, "6"=>20, "7"=>16, "8"=>21, "9"=>54, "10"=>20, "11"=>32, "12"=>15, "13"=>11, "14"=>2, "15"=>9, "16"=>20, "17"=>24, "18"=>30, "19"=>20, "20"=>27, "21"=>27, "22"=>26, "23"=>22, "24"=>13, "25"=>18, "26"=>33, "27"=>19, "28"=>16, "29"=>22, "30"=>45}
+      data.send(:temperature_spreads).should == {"1"=>29, "2"=>16, "3"=>22, "4"=>18, "5"=>24, "6"=>20, "7"=>16, "8"=>21, "9"=>54, "10"=>20, "11"=>32, "12"=>15, "13"=>11, "14"=>2, "15"=>9, "16"=>20, "17"=>24, "18"=>30, "19"=>20, "20"=>27, "21"=>27, "22"=>26, "23"=>22, "24"=>13, "25"=>18, "26"=>33, "27"=>19, "28"=>16, "29"=>22, "30"=>45}
     end
   end
 
   describe "#lowest_spread" do
-    it "returns the day number with the smallest temperature spread"
-    # min = w.temperature_spreads.values.min   # =>  min value from the temps hash
-    # day = w.temperature_spreads.key(min)     # =>  day that matches min value
+    it "returns the day number with the smallest temperature spread" do
+      data = WeatherData.new(file)
+      data.lowest_spread.should == "14"
+    end
   end
 end

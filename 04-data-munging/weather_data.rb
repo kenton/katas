@@ -7,6 +7,14 @@ class WeatherData
     @temperatures = {}
   end
 
+  def lowest_spread
+    temperature_spreads
+    min_spread = @temperatures.values.min
+    @temperatures.key(min_spread)
+  end
+
+  private
+
   def temperature_spreads
     lines = truncate_file
 
@@ -20,8 +28,6 @@ class WeatherData
     end
     @temperatures
   end
-
-  private
 
   def truncate_file
     lines = @file.split("\n")
