@@ -4,7 +4,7 @@ class WeatherData
 
   def initialize(file)
     @file = file
-    @temperatures = {}
+    @temperatures ||= temperature_spreads
   end
 
   def lowest_spread
@@ -16,6 +16,8 @@ class WeatherData
   private
 
   def temperature_spreads
+    temp_spreads = {}
+
     lines = truncate_file
 
     lines.each do |line|
@@ -24,9 +26,9 @@ class WeatherData
       min_temp = line[2].to_i
       temp_spread = max_temp - min_temp
 
-      @temperatures[day] = temp_spread
+      temp_spreads[day] = temp_spread
     end
-    @temperatures
+    temp_spreads
   end
 
   def truncate_file
